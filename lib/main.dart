@@ -1,7 +1,20 @@
+import 'package:dy_doctor/application.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import './pages/login/guide_page.dart';
+import './routers/routes.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  //初始化并配置路由器
+  final router = new Router();
+  Routes.configureRoutes(router);
+  Application.router = router;
+  runApp(
+    MaterialApp(
+      onGenerateRoute: Application.router.generator ,
+    )
+  );
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

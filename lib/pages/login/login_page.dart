@@ -1,4 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:dy_doctor/net/net_url.dart';
+import 'package:dy_doctor/net/net_util.dart';
+import 'package:dy_doctor/utils/log_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,8 +25,12 @@ class _LoginPageState extends State<LoginPage> {
             child: Text("网络请求"),
             onPressed: (){
               print("您点击了---");
-              getHttp();
+              login();
+//              getHttp();
             },
+          ),
+          OutlineButton(
+            child: Text("下拉刷新， 加载更多"),
           )
         ],
       ),
@@ -36,5 +43,15 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       print(e);
     }
+  }
+
+  void login() {
+    var params = {'aa':"zs"};
+    NetUtil.login(params,success: (response){
+      LogUtil.i("我拿到请求结果了----" + response.toString());
+
+    },failure: (error){
+
+    });
   }
 }

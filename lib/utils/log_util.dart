@@ -6,4 +6,8 @@ class LogUtil{
     if(isLog)
       print(tag+"--" + str);
   }
+  static void i(String str) {
+    if(isLog)
+      print(tag+"--" + str);
+  }
 }

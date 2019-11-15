@@ -36,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
       Routes.doNextNoBack(context, Routes.guide);
     } else {
       myTimer = new Timer(timeout,(){
-        Routes.doNext(context, Routes.login);
+        Routes.doNextNoBack(context, Routes.login);
       });
     }
   }

@@ -1,3 +1,4 @@
+import 'package:dy_doctor/res/my_colors.dart';
 import 'package:dy_doctor/utils/log_util.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -44,31 +45,36 @@ abstract class BaseWidgetState<T extends StatefulWidget> extends State<T> with W
   @override
   Widget build(BuildContext context) {
     this.mContext = context;
-    return Stack(
-      children: <Widget>[
-        Visibility(
-          visible: isShowAppBar,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text("title"),
-            ),
-            body: Container(
-              child: createWidget(),
-            ),
-          ),
-        ),
-        Visibility(
-          visible: !isShowAppBar,
-          child: Scaffold(
-            body: Container(
-              child: createWidget(),
+    return Theme(
+      data: ThemeData(
+        cursorColor: Color(MyColors.colorDefault),
+      ),
+      child: Stack(
+        children: <Widget>[
+          Visibility(
+            visible: isShowAppBar,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Text("title"),
+              ),
+              body: Container(
+                child: buildWidgets(),
+              ),
             ),
           ),
-        )
-      ],
+          Visibility(
+            visible: !isShowAppBar,
+            child: Scaffold(
+              body: Container(
+                child: buildWidgets(),
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
-  Widget createWidget();
+  Widget buildWidgets();
 
   ///模仿Android生命周期
   void onCreate(){

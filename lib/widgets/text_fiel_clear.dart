@@ -13,7 +13,7 @@ class TextFieldClear extends StatefulWidget {
 class _TextFieldClearState extends State<TextFieldClear> {
   var _clearText = false;
   var controller;
-  var text = "1212";
+  var text = "";
   void clearText() {
     _clearText = true;
     setState(() {
@@ -26,7 +26,7 @@ class _TextFieldClearState extends State<TextFieldClear> {
   @override
   void initState() {
     super.initState();
-//    controller = TextEditingController();
+    controller = TextEditingController();
 //    this.controller.text = "faklfks";
    /* controller.addListener(() {});
     controller.value = TextEditingController.fromValue(TextEditingValue(
@@ -64,6 +64,7 @@ class _TextFieldClearState extends State<TextFieldClear> {
               style:  TextStyle(
                 fontSize: Dimens.sizeLogin,
               ),
+
             ),
           ),
           SizedBox(
@@ -80,7 +81,6 @@ class _TextFieldClearState extends State<TextFieldClear> {
             ),
             onTap: (){
               LogUtil.i("aaa" + controller.text.toString());
-
             },
           )
         ],

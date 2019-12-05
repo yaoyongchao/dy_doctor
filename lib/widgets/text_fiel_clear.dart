@@ -19,8 +19,6 @@ class _TextFieldClearState extends State<TextFieldClear> {
     setState(() {
       LogUtil.i("_clear" + _clearText.toString());
     });
-
-
   }
 
   @override
@@ -81,6 +79,8 @@ class _TextFieldClearState extends State<TextFieldClear> {
             ),
             onTap: (){
               LogUtil.i("aaa" + controller.text.toString());
+              controller.text = "";
+
             },
           )
         ],

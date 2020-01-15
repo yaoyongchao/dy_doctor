@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dy_doctor/res/dimens.dart';
 import 'package:dy_doctor/res/my_colors.dart';
 import 'package:dy_doctor/utils/log_util.dart';
@@ -5,15 +7,26 @@ import 'package:flutter/material.dart';
 class TextFieldClear extends StatefulWidget {
   final double mWidth;
   final double mHeight;
-  TextFieldClear({Key key,this.mWidth,this.mHeight}) : super(key:key);
+  TextInputType keyboardType = TextInputType.text;
+  final ValueChanged<String> onChanged;
+  final String hintText;
+  final bool showBoder;//是否显示边框
+  TextFieldClear({Key key,this.mWidth,this.mHeight,this.keyboardType,this.onChanged,this.hintText,this.showBoder}) : super(key:key);
   @override
-  _TextFieldClearState createState() => _TextFieldClearState();
+  _TextFieldClearState createState() => _TextFieldClearState(keyboardType,onChanged,hintText,showBoder);
 }
 
 class _TextFieldClearState extends State<TextFieldClear> {
   var _clearText = false;
   var controller;
   var text = "";
+  final TextInputType keyboardType;
+  final ValueChanged<String> _onChanged;
+  final String _hintText;
+  final bool _showBoder;
+  var borderWidth = 1.0;
+  _TextFieldClearState(this.keyboardType, this._onChanged,this._hintText,this._showBoder);
+
   void clearText() {
     _clearText = true;
     setState(() {
@@ -25,23 +38,15 @@ class _TextFieldClearState extends State<TextFieldClear> {
   void initState() {
     super.initState();
     controller = TextEditingController();
-//    this.controller.text = "faklfks";
-   /* controller.addListener(() {});
-    controller.value = TextEditingController.fromValue(TextEditingValue(
-        text: "12212",  //判断keyword是否为空
-        // 保持光标在最后
-
-        selection: TextSelection.fromPosition(TextPosition(
-            affinity: TextAffinity.downstream,
-            ))),
-    );*/
+    borderWidth = _showBoder?1.0:0.0;
+    LogUtil.i("widht:" + borderWidth.toString() + "--" + _showBoder.toString());
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-      border:  Border(bottom: BorderSide(color: Color(MyColors.borderDefault),width: 1.0)),
+      border:_showBoder?Border(bottom: BorderSide(color: Color(MyColors.borderDefault),width: 1.0)):null,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -50,11 +55,11 @@ class _TextFieldClearState extends State<TextFieldClear> {
           Expanded(
             child: TextField(
               controller:  controller,
-              keyboardType: TextInputType.phone,
+              keyboardType: this.keyboardType,
               cursorWidth: 0.5,
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: "请输入后手机号",
+                hintText: _hintText,
                 hintStyle: TextStyle(
                   color: Color(MyColors.colorHint),
                 ),
@@ -62,7 +67,32 @@ class _TextFieldClearState extends State<TextFieldClear> {
               style:  TextStyle(
                 fontSize: Dimens.sizeLogin,
               ),
-
+              maxLines: 1,
+              maxLengthEnforced: true,
+              autocorrect: true,
+              autofocus: true,
+              onChanged: (value) {
+                if(keyboardType == TextInputType.phone) {
+                  value = value.replaceAll(" ", "");
+                  if(4<=value.length ) {
+                    var textValue = value.replaceRange(2, 3, value.substring(2,3)+" ");
+                    if(textValue.length>8) {
+                      textValue = textValue.replaceRange(7, 8, value.substring(6,7)+" ");
+                    }
+                    controller.text = textValue;
+                    //每次修改内容的时候需要在手动修改selection
+                    controller.selection = TextSelection.fromPosition(
+                        TextPosition(
+                            affinity: TextAffinity.downstream,
+                            offset: controller.text.length
+                        )
+                    );
+                  }
+                }
+                _onChanged(value);
+                setState(() {
+                });
+              },
             ),
           ),
           SizedBox(
@@ -70,16 +100,21 @@ class _TextFieldClearState extends State<TextFieldClear> {
             height: 1.0,
           ),
           GestureDetector(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(30.0, 10.0, 0.0, 10.0),
-              child: Image(
-                image: AssetImage("images/ic_delete.png"),
-                width: 20.0,
+            child: Visibility(
+              visible: controller.text.length == 0 ? false : true,
+              child: Container(
+                padding: EdgeInsets.fromLTRB(30.0, 10.0, 0.0, 10.0),
+                child: Image(
+                  image: AssetImage("images/ic_delete.png"),
+                  width: 20.0,
+                ),
               ),
             ),
             onTap: (){
               LogUtil.i("aaa" + controller.text.toString());
               controller.text = "";
+              setState(() {
+              });
 
             },
           )

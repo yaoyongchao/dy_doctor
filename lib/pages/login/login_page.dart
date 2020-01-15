@@ -87,8 +87,45 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
           TextFieldClear(
             mWidth: double.infinity,
             mHeight: 200.0,
+            hintText: "请输入后手机号",
+            keyboardType: TextInputType.phone,
+            showBoder: true,
+            onChanged: (value) {
+              LogUtil.i("我时好人啊： " + value);
+            },
           ),
 
+          Container(
+            decoration: BoxDecoration(
+              border:  Border(bottom: BorderSide(color: Color(MyColors.borderDefault),width: Dimens.sizeBorder)),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: TextFieldClear(
+                    mWidth: 200.0,
+                    mHeight: 200.0,
+                    hintText: "请输入密码",
+                    keyboardType: TextInputType.number,
+                    showBoder: false,
+                    onChanged: (value) {
+                      LogUtil.i("我时好人啊： " + value);
+                    },
+                  ),
+                ),
+                FlatButton(
+                  child: Text("发送验证码",style:TextStyle(fontSize: 16)),
+                  padding: EdgeInsets.all(0.0),
+                  textColor: Color(MyColors.colorGey),
+                  onPressed: (){
+                    LogUtil.i("111111");
+                  },
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );

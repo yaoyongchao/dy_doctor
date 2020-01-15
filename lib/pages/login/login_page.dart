@@ -4,6 +4,7 @@ import 'package:dy_doctor/net/net_url.dart';
 import 'package:dy_doctor/net/net_util.dart';
 import 'package:dy_doctor/res/dimens.dart';
 import 'package:dy_doctor/res/my_colors.dart';
+import 'package:dy_doctor/res/strings.dart';
 import 'package:dy_doctor/utils/log_util.dart';
 import 'package:dy_doctor/widgets/text_fiel_clear.dart';
 import 'package:flutter/cupertino.dart';
@@ -117,6 +118,9 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
                     },
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
                 FlatButton(
                   child: Text("发送验证码",style:TextStyle(fontSize: 16)),
                   padding: EdgeInsets.all(0.0),
@@ -124,9 +128,104 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
                   onPressed: (){
                     LogUtil.i("111111");
                   },
-                )
+                ),
               ],
             ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(10.0),
+          ),
+          Row(
+            children: <Widget>[
+              Text("未注册的手机号,请",
+                style: TextStyle(
+                  fontSize: 12.0
+              ),
+              ),
+              Text("联系客服",
+                style: TextStyle(
+                    fontSize: 12.0,
+                  color:Color(0xfff7ba53),
+                  decoration: TextDecoration.underline
+                ),),
+              Text("注册",
+                style: TextStyle(
+                    fontSize: 12.0
+                ),),
+            ],
+          ),
+          SizedBox(
+            width: 1,
+            height: 40.0,
+          ),
+          FlatButton(
+            child: Container(
+              alignment: Alignment.center,
+              child: Text("登 录",style: TextStyle(color: Colors.white,fontSize: 20.0),),
+              height: 44.0,
+              width: double.infinity,
+            ),
+//            colorBrightness: Brightness.dark,
+            hoverColor: Color(MyColors.colorBtnLoginPressed),
+            color: Color(MyColors.colorBtnLoginNormal),
+            shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
+            onPressed: () {
+
+            },
+          ),
+          Expanded(
+            child: SizedBox(
+              width: 1,
+              height: 40.0,
+            ),
+          ),
+          Container(
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Image(
+                    image: AssetImage("images/ic_kf.png"),
+                    width: 13.0,
+                    height: 13.0,
+                    alignment: Alignment.centerLeft,
+                  ),
+                  SizedBox(
+                    width: 8.0,
+                  ),
+                  Text(
+                      "客服热线 " + Strings.customerHotline,
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      color: Color(MyColors.colorGey)
+                    ),
+                  )
+                ],
+              ),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Color(0xFFF1F0F5),width: 0.5),
+                  borderRadius: BorderRadius.circular(15.0)
+
+              ),
+              alignment: Alignment.center,
+              width: 200.0,
+              height: 32.0,
+
+            ),
+            alignment: Alignment.center,
+          ),
+          Container(
+            height: 30.0,
+            alignment: Alignment.center,
+            child: Text(
+                "我已阅读并同意《用户协议》",
+              style: TextStyle(
+                fontSize: 10.0,
+                color: Color(0xFFC1C1C1)
+              ),
+            ),
+            margin: EdgeInsets.fromLTRB(0,0,0,0),
           ),
         ],
       ),

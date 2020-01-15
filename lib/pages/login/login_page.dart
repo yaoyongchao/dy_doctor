@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 
 import 'login_contract.dart';
 import 'login_presenter.dart';
-
+/**
+ * 登录成功
+ */
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();

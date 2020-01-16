@@ -11,9 +11,10 @@ class TextFieldClear extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final String hintText;
   final bool showBoder;//是否显示边框
-  TextFieldClear({Key key,this.mWidth,this.mHeight,this.keyboardType,this.onChanged,this.hintText,this.showBoder}) : super(key:key);
+  final int maxLength;
+  TextFieldClear({Key key,this.mWidth,this.mHeight,this.keyboardType,this.onChanged,this.hintText,this.showBoder,this.maxLength}) : super(key:key);
   @override
-  _TextFieldClearState createState() => _TextFieldClearState(keyboardType,onChanged,hintText,showBoder);
+  _TextFieldClearState createState() => _TextFieldClearState(keyboardType,onChanged,hintText,showBoder,maxLength);
 }
 
 class _TextFieldClearState extends State<TextFieldClear> {
@@ -25,7 +26,8 @@ class _TextFieldClearState extends State<TextFieldClear> {
   final String _hintText;
   final bool _showBoder;
   var borderWidth = 1.0;
-  _TextFieldClearState(this.keyboardType, this._onChanged,this._hintText,this._showBoder);
+  final int maxLength;
+  _TextFieldClearState(this.keyboardType, this._onChanged,this._hintText,this._showBoder,this.maxLength);
 
   void clearText() {
     _clearText = true;
@@ -66,6 +68,7 @@ class _TextFieldClearState extends State<TextFieldClear> {
               ),
               style:  TextStyle(
                 fontSize: Dimens.sizeLogin,
+                  textBaseline: TextBaseline.alphabetic
               ),
               maxLines: 1,
               maxLengthEnforced: true,
@@ -74,12 +77,13 @@ class _TextFieldClearState extends State<TextFieldClear> {
               onChanged: (value) {
                 if(keyboardType == TextInputType.phone) {
                   value = value.replaceAll(" ", "");
-                  if(4<=value.length ) {
-                    var textValue = value.replaceRange(2, 3, value.substring(2,3)+" ");
-                    if(textValue.length>8) {
-                      textValue = textValue.replaceRange(7, 8, value.substring(6,7)+" ");
+
+                  if(value.length >= 4 ) {
+                    text = value.replaceRange(2, 3, value.substring(2,3)+" ");
+                    if(text.length>8) {
+                      text = text.replaceRange(7, 8, value.substring(6,7)+" ");
                     }
-                    controller.text = textValue;
+                    controller.text = text;
                     //每次修改内容的时候需要在手动修改selection
                     controller.selection = TextSelection.fromPosition(
                         TextPosition(

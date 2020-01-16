@@ -74,6 +74,7 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
     return SingleChildScrollView(
       child: Container(
         width: double.infinity,
+        height: mHeight,
         padding: EdgeInsets.fromLTRB(Dimens.marginLogin, 90.0, Dimens.marginLogin, 10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,6 +93,7 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
               mWidth: double.infinity,
               mHeight: 200.0,
               hintText: "请输入后手机号",
+              maxLength: 11,
               keyboardType: TextInputType.phone,
               showBoder: true,
               onChanged: (value) {
@@ -114,6 +116,7 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
                       hintText: "请输入密码",
                       keyboardType: TextInputType.number,
                       showBoder: false,
+                      maxLength: 6,
                       onChanged: (value) {
                         LogUtil.i("我时好人啊： " + value);
                       },
@@ -174,7 +177,9 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
 
               },
             ),
-
+            Expanded(
+              child: Text(""),
+            ),
             Container(
               child: Container(
                 child: Row(
@@ -223,7 +228,6 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
               ),
               margin: EdgeInsets.fromLTRB(0,0,0,0),
             ),
-
           ],
         ),
       ),

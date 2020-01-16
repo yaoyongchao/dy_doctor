@@ -16,6 +16,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 //paused 应用程序处于用户不可见，不响应用户状态，处于后台运行状态，类似于 Android onPause()；
 abstract class BaseWidgetState<T extends StatefulWidget> extends State<T> with WidgetsBindingObserver{
   BuildContext mContext;
+  double mHeight;
+  double mWidth;
   bool isShowAppBar = true;
 
   BaseWidgetState(){
@@ -45,6 +47,9 @@ abstract class BaseWidgetState<T extends StatefulWidget> extends State<T> with W
   @override
   Widget build(BuildContext context) {
     this.mContext = context;
+    final size = MediaQuery.of(context).size;
+    mWidth = size.width;
+    mHeight = size.height;
     return Theme(
       data: ThemeData(
         cursorColor: Color(MyColors.colorDefault),

@@ -7,4 +7,6 @@ class MyColors {
   static const colorHint = 0xFFE7E6EB;
   static const colorBtnLoginNormal = 0xFFD74326;
   static const colorBtnLoginPressed = 0xFFC1C1C1;
+  static const tabNromal = 0xFF434343;
+  static const tabSelected = 0xFFD74326;
 }

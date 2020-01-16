@@ -1,3 +1,4 @@
+import 'package:dy_doctor/pages/home/home_page.dart';
 import 'package:dy_doctor/pages/login/login_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,9 +12,10 @@ class Routes{
   static String ma = "/lib/main";
   static String splash = "/splash";
   static String guide = "/guide";
-  static String home = "/lib/home";
+  static String home = "/pages/home/home_page";
   static String login = "/login";
 
+//  static String work
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
       handlerFunc: (BuildContext context,Map<String,List<String>> params) {
@@ -23,6 +25,7 @@ class Routes{
     router.define(root, handler: Handler(handlerFunc: (context,params)=>SplashPage()));
     router.define(guide, handler: Handler(handlerFunc: (context,params)=>GuidePage()));
     router.define(login, handler: Handler(handlerFunc: (context,params)=>LoginPage()));
+    router.define(home, handler: Handler(handlerFunc: (context,params)=>HomePage()));
   }
 
   static void doNext(BuildContext context,String routPath) {

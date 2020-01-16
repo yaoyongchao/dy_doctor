@@ -5,6 +5,7 @@ import 'package:dy_doctor/net/net_util.dart';
 import 'package:dy_doctor/res/dimens.dart';
 import 'package:dy_doctor/res/my_colors.dart';
 import 'package:dy_doctor/res/strings.dart';
+import 'package:dy_doctor/routers/routes.dart';
 import 'package:dy_doctor/utils/log_util.dart';
 import 'package:dy_doctor/widgets/text_fiel_clear.dart';
 import 'package:flutter/cupertino.dart';
@@ -174,7 +175,8 @@ class _LoginPageState extends MvpBaseWidgetState<LoginPage,LoginView,LoginPresen
               color: Color(MyColors.colorBtnLoginNormal),
               shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
               onPressed: () {
-
+                LogUtil.i("aaa");
+                Routes.doNext(context, Routes.home);
               },
             ),
             Expanded(

@@ -9,4 +9,5 @@ class MyColors {
   static const colorBtnLoginPressed = 0xFFC1C1C1;
   static const tabNromal = 0xFF434343;
   static const tabSelected = 0xFFD74326;
+  static const txtRed = 0xFFD2572F;
 }

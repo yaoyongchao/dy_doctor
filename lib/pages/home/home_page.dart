@@ -14,8 +14,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   final tabWidth = 24.0;
   final tabHeight = 24.0;
+  final tabTitles = ["工作台","粉丝","收益","我的"];
+  final tabTextStyleSelected = TextStyle(color: Color(MyColors.tabSelected));
+  final tabTextStyleNormal = TextStyle(color: Color(MyColors.tabNromal));
+  var tabImages;
   //当前选中页索引
   var _currentIndex = 0;
+  Image getTabImage(path) {
+    return Image.asset(path,width: tabWidth,height: tabHeight,);
+  }
+
   currentPage() {
     switch(_currentIndex) {
       case 0:
@@ -28,6 +36,39 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         return MinePage();
     }
   }
+
+  //设置TabBar 选中和未选中的状态
+  TextStyle getTabTestStyle (int curIndex) {
+    if(curIndex == _currentIndex)
+      return tabTextStyleSelected;
+    return tabTextStyleNormal;
+  }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    tabImages = [
+      [
+        getTabImage("images/ic_tab1_selected.png"),
+        getTabImage("images/ic_tab1_normal.png")
+      ],
+      [
+        getTabImage("images/ic_tab2_selected.png"),
+        getTabImage("images/ic_tab2_normal.png")
+      ],
+      [
+        getTabImage("images/ic_tab3_selected.png"),
+        getTabImage("images/ic_tab3_normal.png")
+      ],
+      [
+        getTabImage("images/ic_tab4_selected.png"),
+        getTabImage("images/ic_tab4_normal.png")
+      ]
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build

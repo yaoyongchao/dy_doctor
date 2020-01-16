@@ -11,6 +11,7 @@ void main() {
   Application.router = router;
   runApp(
     MaterialApp(
+      debugShowCheckedModeBanner: false,//去掉右上角Debug标签
       onGenerateRoute: Application.router.generator ,
     )
   );
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.

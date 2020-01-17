@@ -125,6 +125,9 @@ class _WorkbenchPageState extends BaseWidgetState<WorkbenchPage> {
                             txtValue: 0,
                             txtUnit: '/期',
                             txtDesc: '贡献科普',
+                            onTap: () {
+
+                            },
                           ),
                         ),
                         Container(
@@ -137,6 +140,9 @@ class _WorkbenchPageState extends BaseWidgetState<WorkbenchPage> {
                             txtValue: 0,
                             txtUnit: '/期',
                             txtDesc: '贡献科普',
+                            onTap: () {
+
+                            },
                           ),
                         ),
                         Container(
@@ -149,6 +155,9 @@ class _WorkbenchPageState extends BaseWidgetState<WorkbenchPage> {
                             txtValue: 0,
                             txtUnit: '/期',
                             txtDesc: '贡献科普',
+                            onTap: () {
+
+                            },
                           ),
                         ),
                       ],
@@ -183,8 +192,42 @@ class _WorkbenchPageState extends BaseWidgetState<WorkbenchPage> {
                     ),
                     textAlign: TextAlign.start,
                   ),
-                  margin: EdgeInsets.fromLTRB(20.0, 20.0, 0, 0),
+                  margin: EdgeInsets.fromLTRB(20.0, 20.0, 0, 5),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(11.0, 15.0, 11.0, 17.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: FeaturesItem(
+                          imgPath: "images/ic_home_item1.png",
+                          txtValue: "邀请患者",
+                          onTap: (){
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: FeaturesItem(
+                          imgPath: "images/ic_home_item2.png",
+                          txtValue: "语音问答",
+                          onTap: (){
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: FeaturesItem(
+                          imgPath: "images/ic_home_item3.png",
+                          txtValue: "预约管理",
+                          onTap: (){
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 )
+
+
 
               ],
             ),
@@ -201,72 +244,114 @@ class WorkItem extends StatefulWidget {
   var txtUnit ;
   var txtDesc;
   var txtValue;
-
-  WorkItem({Key key,this.txtUnit, this.txtDesc, this.txtValue}) : super(key:key);
+  var onTap;
+  WorkItem({Key key,this.txtUnit, this.txtDesc, this.txtValue,this.onTap}) : super(key:key);
 
   @override
-  _WorkItemState createState() => _WorkItemState(txtUnit,txtDesc,txtValue);
+  _WorkItemState createState() => _WorkItemState(txtUnit,txtDesc,txtValue,onTap);
 }
 
 class _WorkItemState extends State<WorkItem> {
   var txtUnit ;
   var txtDesc;
   var txtValue;
+  var onTap;
   final txtStyle = TextStyle (
     color: Color(MyColors.colorDefault),
     fontSize: Dimens.txtSmaller
   );
 
-  _WorkItemState(this.txtUnit, this.txtDesc, this.txtValue);
+  _WorkItemState(this.txtUnit, this.txtDesc, this.txtValue, this.onTap);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              txtValue.toString(),
-              style: TextStyle(
-                  color: Color(MyColors.txtRed),
-                  fontSize: 22.0
+    return GestureDetector(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                txtValue.toString(),
+                style: TextStyle(
+                    color: Color(MyColors.txtRed),
+                    fontSize: 22.0
+                ),
               ),
-            ),
-            Text(
-              txtUnit,
-              style: txtStyle,
-            )
-          ],
-        ),
-        SizedBox(
-          height: 6.0,
-        ),
-        Text(
-          txtDesc,
-          style: txtStyle,
-        )
-      ],
+              Text(
+                txtUnit,
+                style: txtStyle,
+              )
+            ],
+          ),
+          SizedBox(
+            height: 6.0,
+          ),
+          Text(
+            txtDesc,
+            style: txtStyle,
+          )
+        ],
+      ),
+      onTap: onTap,
     );
   }
 }
-
 //功能Item
 class FeaturesItem extends StatefulWidget {
+  var imgPath;
+  var txtValue;
+  var onTap;
+  FeaturesItem({Key key ,this.imgPath, this.txtValue,this.onTap}) : super(key:key);
   @override
-  _FeaturesItemState createState() => _FeaturesItemState();
+  _FeaturesItemState createState() => _FeaturesItemState(imgPath,txtValue,onTap);
 }
-
 class _FeaturesItemState extends State<FeaturesItem> {
+  var imgPath;
+  var txtValue;
+  var onTap;
+  _FeaturesItemState(this.imgPath, this.txtValue, this.onTap);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-
-      ],
+    return GestureDetector(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              ClipOval(
+                child: Container(
+                  color: Color(0xFFF1F0F5),
+                  width: 60.0,
+                  height: 60.0,
+                  alignment: Alignment.center,
+                  child: Image(
+//                  image: AssetImage("images/ic_home_item1.png"),
+                    image: AssetImage(imgPath),
+                    width: 32.0,
+                    height: 34.0,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Text(
+                txtValue,
+                style: TextStyle(
+                    color: Color(MyColors.colorDefault),
+                    fontSize: Dimens.txtSmall
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+      onTap: onTap,
     );
   }
 }

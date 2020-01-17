@@ -10,4 +10,5 @@ class MyColors {
   static const tabNromal = 0xFF434343;
   static const tabSelected = 0xFFD74326;
   static const txtRed = 0xFFD2572F;
+  static const bgGray = 0xFFF5F5F5;
 }

@@ -1,5 +1,6 @@
 import 'package:dy_doctor/pages/home/home_page.dart';
 import 'package:dy_doctor/pages/login/login_page.dart';
+import 'package:dy_doctor/pages/mine/personalinfor/personal_infor_page.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:dy_doctor/main.dart';
@@ -13,6 +14,7 @@ class Routes{
   static String splash = "/splash";
   static String guide = "/guide";
   static String home = "/pages/home/home_page";
+  static String personal = "/pages/mine/personalinfor";
   static String login = "/login";
 
 //  static String work
@@ -26,6 +28,7 @@ class Routes{
     router.define(guide, handler: Handler(handlerFunc: (context,params)=>GuidePage()));
     router.define(login, handler: Handler(handlerFunc: (context,params)=>LoginPage()));
     router.define(home, handler: Handler(handlerFunc: (context,params)=>HomePage()));
+    router.define(personal, handler: Handler(handlerFunc: (context,params)=>PersonalInforPage()));
   }
 
   static void doNext(BuildContext context,String routPath) {

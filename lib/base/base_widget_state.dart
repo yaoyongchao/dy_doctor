@@ -53,6 +53,7 @@ abstract class BaseWidgetState<T extends StatefulWidget> extends State<T> with W
     return Theme(
       data: ThemeData(
         cursorColor: Color(MyColors.colorDefault),
+        primaryColor: Colors.white
       ),
       child: Stack(
         children: <Widget>[
